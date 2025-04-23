@@ -1,5 +1,3 @@
-#SQL_analyst
-
 This project showcases a full data analytics workflow using SQL, JavaScript, and Excel to simulate a real-world business scenario involving regional sales performance.
 
 🔧 What I Did:
