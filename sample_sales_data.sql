@@ -1,0 +1,68 @@
+CREATE TABLE sales (id INT, product_name VARCHAR(50), region VARCHAR(20), sale_date DATE, sale_amount DECIMAL(10, 2));
+
+INSERT INTO sales (id, product_name, region, sale_date, sale_amount) VALUES (1, 'Widget A', 'East', '2025-03-08', 1243.95);
+INSERT INTO sales (id, product_name, region, sale_date, sale_amount) VALUES (2, 'Widget C', 'South', '2025-01-23', 2569.44);
+INSERT INTO sales (id, product_name, region, sale_date, sale_amount) VALUES (3, 'Gadget Y', 'South', '2025-01-05', 510.3);
+INSERT INTO sales (id, product_name, region, sale_date, sale_amount) VALUES (4, 'Widget B', 'West', '2025-01-06', 2322.64);
+INSERT INTO sales (id, product_name, region, sale_date, sale_amount) VALUES (5, 'Widget C', 'South', '2025-02-08', 2657.51);
+INSERT INTO sales (id, product_name, region, sale_date, sale_amount) VALUES (6, 'Gadget X', 'North', '2025-03-16', 2791.67);
+INSERT INTO sales (id, product_name, region, sale_date, sale_amount) VALUES (7, 'Widget A', 'South', '2025-01-22', 2643.08);
+INSERT INTO sales (id, product_name, region, sale_date, sale_amount) VALUES (8, 'Widget C', 'East', '2025-02-13', 2424.42);
+INSERT INTO sales (id, product_name, region, sale_date, sale_amount) VALUES (9, 'Gadget X', 'South', '2025-02-01', 1242.12);
+INSERT INTO sales (id, product_name, region, sale_date, sale_amount) VALUES (10, 'Gadget X', 'North', '2025-02-20', 2464.61);
+INSERT INTO sales (id, product_name, region, sale_date, sale_amount) VALUES (11, 'Widget C', 'West', '2025-02-28', 1181.79);
+INSERT INTO sales (id, product_name, region, sale_date, sale_amount) VALUES (12, 'Gadget Y', 'North', '2025-02-04', 2659.17);
+INSERT INTO sales (id, product_name, region, sale_date, sale_amount) VALUES (13, 'Widget C', 'East', '2025-01-30', 2728.42);
+INSERT INTO sales (id, product_name, region, sale_date, sale_amount) VALUES (14, 'Widget C', 'East', '2025-03-09', 665.05);
+INSERT INTO sales (id, product_name, region, sale_date, sale_amount) VALUES (15, 'Widget B', 'West', '2025-02-13', 545.12);
+INSERT INTO sales (id, product_name, region, sale_date, sale_amount) VALUES (16, 'Gadget Y', 'North', '2025-03-26', 1837.91);
+INSERT INTO sales (id, product_name, region, sale_date, sale_amount) VALUES (17, 'Gadget X', 'West', '2025-01-13', 599.75);
+INSERT INTO sales (id, product_name, region, sale_date, sale_amount) VALUES (18, 'Widget C', 'South', '2025-02-09', 2900.23);
+INSERT INTO sales (id, product_name, region, sale_date, sale_amount) VALUES (19, 'Widget B', 'North', '2025-01-21', 682.51);
+INSERT INTO sales (id, product_name, region, sale_date, sale_amount) VALUES (20, 'Widget C', 'South', '2025-01-26', 2409.61);
+INSERT INTO sales (id, product_name, region, sale_date, sale_amount) VALUES (21, 'Widget C', 'North', '2025-03-10', 2860.91);
+INSERT INTO sales (id, product_name, region, sale_date, sale_amount) VALUES (22, 'Gadget X', 'North', '2025-02-24', 1657.6);
+INSERT INTO sales (id, product_name, region, sale_date, sale_amount) VALUES (23, 'Widget A', 'North', '2025-03-07', 986.5);
+INSERT INTO sales (id, product_name, region, sale_date, sale_amount) VALUES (24, 'Gadget X', 'West', '2025-01-31', 2397.77);
+INSERT INTO sales (id, product_name, region, sale_date, sale_amount) VALUES (25, 'Widget B', 'East', '2025-03-01', 826.7);
+INSERT INTO sales (id, product_name, region, sale_date, sale_amount) VALUES (26, 'Widget A', 'West', '2025-01-28', 1340.91);
+INSERT INTO sales (id, product_name, region, sale_date, sale_amount) VALUES (27, 'Widget B', 'West', '2025-03-28', 1205.99);
+INSERT INTO sales (id, product_name, region, sale_date, sale_amount) VALUES (28, 'Gadget Y', 'North', '2025-03-26', 2507.06);
+INSERT INTO sales (id, product_name, region, sale_date, sale_amount) VALUES (29, 'Gadget X', 'North', '2025-03-15', 1316.8);
+INSERT INTO sales (id, product_name, region, sale_date, sale_amount) VALUES (30, 'Widget B', 'North', '2025-01-22', 1923.52);
+INSERT INTO sales (id, product_name, region, sale_date, sale_amount) VALUES (31, 'Widget B', 'North', '2025-03-12', 2091.45);
+INSERT INTO sales (id, product_name, region, sale_date, sale_amount) VALUES (32, 'Widget B', 'West', '2025-03-09', 524.03);
+INSERT INTO sales (id, product_name, region, sale_date, sale_amount) VALUES (33, 'Gadget Y', 'East', '2025-03-27', 1687.83);
+INSERT INTO sales (id, product_name, region, sale_date, sale_amount) VALUES (34, 'Widget B', 'West', '2025-03-17', 1151.51);
+INSERT INTO sales (id, product_name, region, sale_date, sale_amount) VALUES (35, 'Widget B', 'West', '2025-03-09', 2936.62);
+INSERT INTO sales (id, product_name, region, sale_date, sale_amount) VALUES (36, 'Gadget X', 'South', '2025-03-05', 1221.14);
+INSERT INTO sales (id, product_name, region, sale_date, sale_amount) VALUES (37, 'Widget C', 'North', '2025-03-17', 2130.99);
+INSERT INTO sales (id, product_name, region, sale_date, sale_amount) VALUES (38, 'Widget C', 'South', '2025-02-26', 2805.69);
+INSERT INTO sales (id, product_name, region, sale_date, sale_amount) VALUES (39, 'Widget C', 'East', '2025-03-24', 2933.94);
+INSERT INTO sales (id, product_name, region, sale_date, sale_amount) VALUES (40, 'Widget A', 'East', '2025-02-10', 2757.32);
+INSERT INTO sales (id, product_name, region, sale_date, sale_amount) VALUES (41, 'Gadget X', 'West', '2025-01-24', 1918.71);
+INSERT INTO sales (id, product_name, region, sale_date, sale_amount) VALUES (42, 'Gadget X', 'South', '2025-01-03', 1748.59);
+INSERT INTO sales (id, product_name, region, sale_date, sale_amount) VALUES (43, 'Widget B', 'South', '2025-03-12', 1036.72);
+INSERT INTO sales (id, product_name, region, sale_date, sale_amount) VALUES (44, 'Widget C', 'West', '2025-03-12', 1500.18);
+INSERT INTO sales (id, product_name, region, sale_date, sale_amount) VALUES (45, 'Gadget Y', 'North', '2025-01-16', 2188.07);
+INSERT INTO sales (id, product_name, region, sale_date, sale_amount) VALUES (46, 'Widget C', 'West', '2025-03-20', 2024.45);
+INSERT INTO sales (id, product_name, region, sale_date, sale_amount) VALUES (47, 'Widget C', 'South', '2025-01-27', 1668.09);
+INSERT INTO sales (id, product_name, region, sale_date, sale_amount) VALUES (48, 'Widget C', 'East', '2025-02-20', 2982.09);
+INSERT INTO sales (id, product_name, region, sale_date, sale_amount) VALUES (49, 'Gadget Y', 'East', '2025-02-28', 1935.87);
+INSERT INTO sales (id, product_name, region, sale_date, sale_amount) VALUES (50, 'Gadget X', 'North', '2025-01-07', 857.16);
+INSERT INTO sales (id, product_name, region, sale_date, sale_amount) VALUES (51, 'Widget A', 'North', '2025-03-28', 575.33);
+INSERT INTO sales (id, product_name, region, sale_date, sale_amount) VALUES (52, 'Widget C', 'West', '2025-01-10', 1258.38);
+INSERT INTO sales (id, product_name, region, sale_date, sale_amount) VALUES (53, 'Widget C', 'East', '2025-01-23', 1564.73);
+INSERT INTO sales (id, product_name, region, sale_date, sale_amount) VALUES (54, 'Gadget X', 'West', '2025-01-19', 2998.69);
+INSERT INTO sales (id, product_name, region, sale_date, sale_amount) VALUES (55, 'Widget C', 'South', '2025-02-09', 1905.16);
+INSERT INTO sales (id, product_name, region, sale_date, sale_amount) VALUES (56, 'Gadget X', 'South', '2025-03-20', 1117.84);
+INSERT INTO sales (id, product_name, region, sale_date, sale_amount) VALUES (57, 'Gadget Y', 'West', '2025-02-05', 2228.53);
+INSERT INTO sales (id, product_name, region, sale_date, sale_amount) VALUES (58, 'Gadget Y', 'North', '2025-02-16', 2475.62);
+INSERT INTO sales (id, product_name, region, sale_date, sale_amount) VALUES (59, 'Gadget Y', 'North', '2025-02-28', 707.97);
+INSERT INTO sales (id, product_name, region, sale_date, sale_amount) VALUES (60, 'Widget C', 'South', '2025-03-11', 2396.71);
+select product_name, sum(sale_amount) total_sales
+ from sales
+ group by product_name
+ order by product_name;
+ 
+select * from sales;
