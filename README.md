@@ -2,6 +2,9 @@ dashboard3.html Contains the code.
 
 Can be viewed at https://purribd8.github.io/sql_analyst/dashboard3.html
 
+sql_analyst_practice.xlsx must be downloaded to be viewed.
+
+
 The Widget Sales Dashboard is an interactive web application built with HTML, CSS, and JavaScript, designed to visualize sales performance data across multiple dimensions: region, product, and months. It provides a clean, user-friendly interface and dynamic data visualization using Chart.js, along with export functionality for both CSV and PDF formats.
 
 🚀 Features
