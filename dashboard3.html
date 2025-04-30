@@ -2,11 +2,14 @@
 <html>
 <head>
   <title>Widget Sales Dashboard</title>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <!-- External libraries for charting, data labels, PDF generation, and canvas-to-image functionality -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js for rendering the charts -->
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script> <!-- Plugin to display data labels on charts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script> <!-- jsPDF for exporting charts as PDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script> <!-- html2canvas for converting chart to image -->
+  
   <style>
+    /* General style for the page layout and elements */
     body {
       font-family: Arial, sans-serif;
       padding: 20px;
@@ -22,6 +25,7 @@
       margin-bottom: 10px;
     }
 
+    /* Style for control section (select and buttons) */
     .controls {
       margin-bottom: 20px;
       display: flex;
@@ -35,6 +39,7 @@
       cursor: pointer;
     }
 
+    /* Style for the chart container */
     .chart-container {
       width: 100%;
       max-width: 900px;
@@ -47,6 +52,7 @@
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
 
+    /* Style for the comment section under the chart */
     .chart-comment {
       max-width: 900px;
       background: #fff;
@@ -62,53 +68,59 @@
 <body>
   <h1>Widget Sales Dashboard</h1>
 
+  <!-- Controls for selecting data type and exporting options -->
   <div class="controls">
     <select id="regionFilter">
       <option value="Region">By Region</option>
       <option value="Product">By Product</option>
       <option value="Monthly">By Month</option>
     </select>
-    <button id="exportCSV">Export CSV</button>
-    <button id="exportPDF">Export PDF</button>
+    <button id="exportCSV">Export CSV</button> <!-- Button to export data as CSV -->
+    <button id="exportPDF">Export PDF</button> <!-- Button to export chart as PDF -->
   </div>
 
+  <!-- Chart container where the chart will be rendered -->
   <div class="chart-container">
-    <canvas id="salesChart" width="800" height="400"></canvas>
+    <canvas id="salesChart" width="800" height="400"></canvas> <!-- Chart.js canvas element -->
   </div>
 
-  <!-- Static Comment Section -->
+  <!-- Static comment that gives insight into the data being displayed -->
   <div class="chart-comment" id="chartComment">
     <strong>Insight:</strong> Sales by region reveals the North leads in total sales, which may reflect a dense customer base or superior regional strategies. For more clarification of sales performance, the total customer base, marketing and regional strategies, and specific counts of sales should be reviewed for each specific region.
   </div>
 
   <script>
+    /* Sales data for different categories (Region, Product, Monthly) */
     const salesData = {
       Region: {
         labels: ['North', 'South', 'East', 'West'],
         data: [32714.85, 28832.23, 21750.32, 26135.07],
-        comment: 'Sales by region reveals the North leads in total sales, which may reflect a dense customer base or superior regional strategies. For more clarification of sales performance, the total customer base, marketing and regional strategies, and specific counts of sales should be reviewed for each specific region.'
+        comment: 'Sales by region reveals the North leads in total sales, which may reflect a dense customer base or superior regional strategies...'
       },
       Product: {
         labels: ['Widget C ', 'Gadget X', 'Gadget Y', 'Widget B', 'Widget A'],
         data: [43567.79, 22332.45, 18738.33, 15246.81, 9547.09],
-        comment: 'This chart shows sales figures broken down by product. Widget C leads significantly, indicating high customer preference or marketing success. Customer review surveys can also be analyzed to further determine why customers favor Widget C so heavily. They can also provide insight on why the other gadgets and widgets are underperforming, especially Widget A. Widget C dominates sales performance, likely due to market demand or promotional campaigns. This chart may help explain why other widgets and gadgets, especially Widget A, are underperforming.'
+        comment: 'This chart shows sales figures broken down by product. Widget C leads significantly, indicating high customer preference or marketing success...'
       },
       Monthly: {
         labels: ['January', 'February', 'March'],
         data: [34330.37, 35530.82, 39571.28],
-        comment: ' Monthly sales continue to improve which is always a welcomed sign as it shows continued growth. Total counts of each specific product sold per month help determine which products provide the majority of sales. If we want to dig a little deeper we can look at specific product sale counts per month in each region to give us a picture of how products sell compared to its location. Such information would be useful for marketing purposes.'
+        comment: 'Monthly sales continue to improve, which is always a welcomed sign as it shows continued growth...'
       }
     };
 
+    /* Function to generate colors for each bar in the chart */
     const getColors = (length) => {
       const palette = ['#4BC0C0', '#FF6384', '#36A2EB', '#FFCE56', '#9966FF', '#FF9F40'];
       return Array.from({ length }, (_, i) => palette[i % palette.length]);
     };
 
+    /* Initialize Chart.js */
     const ctx = document.getElementById('salesChart').getContext('2d');
     const regionFilter = document.getElementById('regionFilter');
     const chartComment = document.getElementById('chartComment');
 
+    /* Create initial chart for 'Region' data */
     let chart = new Chart(ctx, {
       type: 'bar',
       data: {
@@ -123,12 +135,9 @@
       },
       options: {
         responsive: true,
-        animation: {
-          duration: 1000,
-          easing: 'easeOutBounce'
-        },
+        animation: { duration: 1000, easing: 'easeOutBounce' },
         plugins: {
-          legend: { display: false },
+          legend: { display: false }, /* Hide legend */
           datalabels: {
             anchor: 'end',
             align: 'end',
@@ -138,15 +147,13 @@
           }
         },
         scales: {
-          y: {
-            beginAtZero: true,
-            max: 45000
-          }
+          y: { beginAtZero: true, max: 45000 } /* Set Y-axis max value */
         }
       },
       plugins: [ChartDataLabels]
     });
 
+    /* Handle region filter change and update the chart accordingly */
     regionFilter.addEventListener('change', function () {
       const selected = this.value;
       const data = salesData[selected].data;
@@ -158,11 +165,11 @@
       chart.data.datasets[0].backgroundColor = getColors(data.length);
       chart.update({ duration: 1000, easing: 'easeOutBounce' });
 
-      // Update comment
+      // Update the comment below the chart
       chartComment.innerHTML = `<strong>Insight:</strong> ${salesData[selected].comment}`;
     });
 
-    // Export to CSV
+    /* Export data as CSV */
     document.getElementById('exportCSV').addEventListener('click', () => {
       const selected = regionFilter.value;
       const labels = chart.data.labels;
@@ -182,7 +189,7 @@
       URL.revokeObjectURL(url);
     });
 
-    // Export to PDF
+    /* Export chart as PDF */
     document.getElementById('exportPDF').addEventListener('click', async () => {
       const chartCanvas = document.getElementById('salesChart');
       const canvasImage = await html2canvas(chartCanvas);
