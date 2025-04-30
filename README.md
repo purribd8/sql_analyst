@@ -1,28 +1,26 @@
-This project showcases a full data analytics workflow using SQL, JavaScript, and Excel to simulate a real-world business scenario involving regional sales performance.
-
 dashboard3.html Contains the javascript code and the website can be viewed at https://purribd8.github.io/sql_analyst/dashboard3.html
 
-🔧 What I Did:
-Created a sales database in MySQL and populated it with realistic, mock transactional data
+The Widget Sales Dashboard is an interactive web application built with HTML, CSS, and JavaScript, designed to visualize sales performance data across multiple dimensions: region, product, and time. It provides a clean, user-friendly interface and dynamic data visualization using Chart.js, along with export functionality for both CSV and PDF formats.
 
-Wrote SQL queries to analyze:
+🚀 Features
+Interactive Charts: Switch between views by Region, Product, or Month to analyze sales performance dynamically.
 
-Total sales by region
+Data Export: Export chart data as CSV or download the rendered chart as a PDF.
 
-Top-performing products
+Insight Annotations: Each chart view includes contextual business insights to assist in interpretation.
 
-Monthly sales trends
+Responsive & Polished UI: Clean layout with modern styling and responsive behavior.
 
-Developed an interactive dashboard in JavaScript using Chart.js (not included in GitHub due to browser-based nature), which visualizes:
+🛠️ Tech Stack
+Chart.js + chartjs-plugin-datalabels – for dynamic data visualizations.
 
-Regional sales performance
+html2canvas + jsPDF – to support PDF export functionality.
 
-Monthly comparisons
+Vanilla JavaScript – no frameworks, keeping it lightweight and dependency-minimal.
 
-Built a professional Excel report, including:
+📂 How to Use
+Clone the repository and open index.html in your browser.
 
-Pivot tables for data summarization
+Use the dropdown to toggle between different data views.
 
-A visual bar chart representing sales trends
-
-This project helped solidify my skills in data modeling, SQL analytics, frontend data visualization, and Excel reporting — all crucial tools in a Data Analyst's toolbox.
+Export data using the Export CSV or Export PDF buttons.
