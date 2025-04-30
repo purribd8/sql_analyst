@@ -3,6 +3,9 @@
 <head>
   <title>Widget Sales Dashboard</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -23,22 +26,36 @@
       margin-bottom: 20px;
       display: flex;
       gap: 10px;
+      flex-wrap: wrap;
     }
 
-    select {
+    select, button {
       font-size: 16px;
       padding: 5px 10px;
+      cursor: pointer;
     }
 
     .chart-container {
       width: 100%;
       max-width: 900px;
+      margin-bottom: 20px;
     }
 
     canvas {
       background-color: white;
       border-radius: 8px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .chart-comment {
+      max-width: 900px;
+      background: #fff;
+      padding: 15px 20px;
+      border-left: 5px solid #4BC0C0;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      font-size: 14px;
+      color: #333;
+      line-height: 1.5;
     }
   </style>
 </head>
@@ -51,25 +68,35 @@
       <option value="Product">By Product</option>
       <option value="Monthly">By Month</option>
     </select>
+    <button id="exportCSV">Export CSV</button>
+    <button id="exportPDF">Export PDF</button>
   </div>
 
   <div class="chart-container">
     <canvas id="salesChart" width="800" height="400"></canvas>
   </div>
 
+  <!-- Static Comment Section -->
+  <div class="chart-comment" id="chartComment">
+    <strong>Insight:</strong> Sales by region reveals the North leads in total sales, which may reflect a dense customer base or superior regional strategies. For more clarification of sales performance, the total customer base, marketing and regional strategies, and specific counts of sales should be reviewed for each specific region.
+  </div>
+
   <script>
     const salesData = {
       Region: {
         labels: ['North', 'South', 'East', 'West'],
-        data: [32714.85, 28832.23, 21750.32, 26135.07]
+        data: [32714.85, 28832.23, 21750.32, 26135.07],
+        comment: 'Sales by region reveals the North leads in total sales, which may reflect a dense customer base or superior regional strategies. For more clarification of sales performance, the total customer base, marketing and regional strategies, and specific counts of sales should be reviewed for each specific region.'
       },
       Product: {
         labels: ['Widget C ', 'Gadget X', 'Gadget Y', 'Widget B', 'Widget A'],
-        data: [43567.79, 22332.45, 18738.33, 15246.81, 9547.09]
+        data: [43567.79, 22332.45, 18738.33, 15246.81, 9547.09],
+        comment: 'This chart shows sales figures broken down by product. Widget C leads significantly, indicating high customer preference or marketing success. Customer review surveys can also be analyzed to further determine why customers favor Widget C so heavily. They can also provide insight on why the other gadgets and widgets are underperforming, especially Widget A. Widget C dominates sales performance, likely due to market demand or promotional campaigns. This chart may help explain why other widgets and gadgets, especially Widget A, are underperforming.'
       },
       Monthly: {
         labels: ['January', 'February', 'March'],
-        data: [34330.37, 35530.82, 39571.28]
+        data: [34330.37, 35530.82, 39571.28],
+        comment: ' Monthly sales continue to improve which is always a welcomed sign as it shows continued growth. Total counts of each specific product sold per month help determine which products provide the majority of sales. If we want to dig a little deeper we can look at specific product sale counts per month in each region to give us a picture of how products sell compared to its location. Such information would be useful for marketing purposes.'
       }
     };
 
@@ -79,6 +106,8 @@
     };
 
     const ctx = document.getElementById('salesChart').getContext('2d');
+    const regionFilter = document.getElementById('regionFilter');
+    const chartComment = document.getElementById('chartComment');
 
     let chart = new Chart(ctx, {
       type: 'bar',
@@ -94,23 +123,78 @@
       },
       options: {
         responsive: true,
+        animation: {
+          duration: 1000,
+          easing: 'easeOutBounce'
+        },
         plugins: {
-          legend: { display: false }
+          legend: { display: false },
+          datalabels: {
+            anchor: 'end',
+            align: 'end',
+            formatter: (value) => `$${value.toLocaleString(undefined, { minimumFractionDigits: 2 })}`,
+            color: '#333',
+            font: { weight: 'bold' }
+          }
         },
         scales: {
           y: {
-            beginAtZero: true
+            beginAtZero: true,
+            max: 45000
           }
         }
-      }
+      },
+      plugins: [ChartDataLabels]
     });
 
-    document.getElementById('regionFilter').addEventListener('change', function () {
+    regionFilter.addEventListener('change', function () {
       const selected = this.value;
+      const data = salesData[selected].data;
+      const yMax = Math.ceil(Math.max(...data) / 5000) * 5000 + 5000;
+
+      chart.options.scales.y.max = yMax;
       chart.data.labels = salesData[selected].labels;
-      chart.data.datasets[0].data = salesData[selected].data;
-      chart.data.datasets[0].backgroundColor = getColors(salesData[selected].data.length);
-      chart.update();
+      chart.data.datasets[0].data = data;
+      chart.data.datasets[0].backgroundColor = getColors(data.length);
+      chart.update({ duration: 1000, easing: 'easeOutBounce' });
+
+      // Update comment
+      chartComment.innerHTML = `<strong>Insight:</strong> ${salesData[selected].comment}`;
+    });
+
+    // Export to CSV
+    document.getElementById('exportCSV').addEventListener('click', () => {
+      const selected = regionFilter.value;
+      const labels = chart.data.labels;
+      const data = chart.data.datasets[0].data;
+
+      let csv = 'Category,Sales\n';
+      labels.forEach((label, i) => {
+        csv += `"${label}",${data[i]}\n`;
+      });
+
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `sales_${selected.toLowerCase()}.csv`;
+      link.click();
+      URL.revokeObjectURL(url);
+    });
+
+    // Export to PDF
+    document.getElementById('exportPDF').addEventListener('click', async () => {
+      const chartCanvas = document.getElementById('salesChart');
+      const canvasImage = await html2canvas(chartCanvas);
+
+      const { jsPDF } = window.jspdf;
+      const pdf = new jsPDF('landscape');
+      const imgData = canvasImage.toDataURL('image/png');
+      const pageWidth = pdf.internal.pageSize.getWidth();
+      const pageHeight = pdf.internal.pageSize.getHeight();
+
+      pdf.addImage(imgData, 'PNG', 10, 10, pageWidth - 20, pageHeight - 20);
+      pdf.save(`sales_chart_${regionFilter.value.toLowerCase()}.pdf`);
     });
   </script>
 </body>
